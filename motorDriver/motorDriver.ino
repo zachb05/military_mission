@@ -11,7 +11,7 @@ pinMode(pwn, OUTPUT);
 
 }
 
-void forwards(int speed);
+void drive(int direction, int speed);
 
 void loop() {
   // put your main code here, to run repeatedly:
@@ -29,13 +29,29 @@ delay(1000);
 
 }
 
-void forwards(int speed, float timeSeconds)
+
+void drive(int direction, int speed)
 {
   float new_speed = map(speed, 0, 100, 50, 255);
-  analogWrite(pwn, new_speed);
-  digitalWrite(bin1, HIGH);
-  digitalWrite(bin2, LOW);
-  delay(timeSeconds*1000);
+ 
+  if(direction == 1)//forwards
+  { 
+    analogWrite(pwn, new_speed);
+    digitalWrite(bin1, HIGH);
+    digitalWrite(bin2, LOW);
+  }
+  else if(direction == -1)//backwards
+  {
+    analogWrite(pwn, new_speed);
+    digitalWrite(bin1, LOW);
+    digitalWrite(bin2, HIGH);
+  }
+  else
+  {
+    analogWrite(pwn, new_speed);
+    digitalWrite(bin1, LOW);
+    digitalWrite(bin2, LOW);
+  }
 }
 
 
